@@ -5,11 +5,10 @@ from utility import to_pickled_df
 
 
 if __name__ == '__main__':
-    data_directory = 'Datasets'
+    data_directory = 'Datasets/Renttherunway'
     
     renttherunway = pd.read_json(os.path.join(data_directory, 'renttherunway_final_data.json.gz'),compression='gzip',lines=True)
-    print(renttherunway.head())
-    total_sessions=renttherunway.index
+    total_sessions=renttherunway.index.values
     np.random.shuffle(total_sessions)
 
     fractions = np.array([0.8, 0.1, 0.1])

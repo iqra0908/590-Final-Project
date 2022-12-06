@@ -16,7 +16,7 @@ def parse_args():
 
     parser.add_argument('--epoch', type=int, default=50,
                         help='Number of max epochs.')
-    parser.add_argument('--data', nargs='?', default='data',
+    parser.add_argument('--data', nargs='?', default='Datasets',
                         help='data directory')
     # parser.add_argument('--pretrain', type=int, default=1,
     #                     help='flag for pretrain. 1: initialize from pretrain; 0: randomly initialize; -1: save the model to pretrain file')
@@ -336,9 +336,9 @@ def evaluate(sess):
                 state=pad_history(state,state_size,item_num)
                 states.append(state)
                 action=row['item_id']
-                is_buy=row['is_buy']
-                reward = reward_buy if is_buy == 1 else reward_click
-                if is_buy==1:
+                rating=row['rating']
+                reward = reward_buy if rating >= 5 else reward_click
+                if rating >= 5:
                     total_purchase+=1.0
                 else:
                     total_clicks+=1.0
@@ -456,10 +456,10 @@ if __name__ == '__main__':
                         negative_list.append(neg)
                     negative.append(negative_list)
 
-                is_buy=list(batch['is_buy'].values())
+                rating=list(batch['rating'].values())
                 reward=[]
-                for k in range(len(is_buy)):
-                    reward.append(reward_buy if is_buy[k] == 1 else reward_click)
+                for k in range(len(rating)):
+                    reward.append(reward_buy if rating[k] >= 5 else reward_click)
                 discount = [args.discount] * len(action)
 
 

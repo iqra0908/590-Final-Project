@@ -8,7 +8,7 @@ def nextitnet_residual_block(input_, dilation, layer_id,
                              causal=True, train=True):
     resblock_type = "decoder"
     resblock_name = "nextitnet_residual_block{}_layer_{}_{}".format(resblock_type, layer_id, dilation)
-    with tf.variable_scope(resblock_name):
+    with tf.compat.v1.variable_scope(resblock_name):
         dilated_conv = conv1d(input_, residual_channels,
                               dilation, kernel_size,
                               causal=causal,
@@ -34,21 +34,21 @@ def nextitnet_residual_block(input_, dilation, layer_id,
 def conv1d(input_, output_channels,
            dilation=1, kernel_size=1, causal=False,
            name="dilated_conv"):
-    with tf.variable_scope(name):
-        weight = tf.get_variable('weight', [1, kernel_size, input_.get_shape()[-1], output_channels],
-                                 initializer=tf.truncated_normal_initializer(stddev=0.02, seed=1))
-        bias = tf.get_variable('bias', [output_channels],
-                               initializer=tf.constant_initializer(0.0))
+    with tf.compat.v1.variable_scope(name):
+        weight = tf.compat.v1.get_variable('weight', [1, kernel_size, input_.get_shape()[-1], output_channels],
+                                 initializer=tf.compat.v1.truncated_normal_initializer(stddev=0.02, seed=1))
+        bias = tf.compat.v1.get_variable('bias', [output_channels],
+                               initializer=tf.compat.v1.constant_initializer(0.0))
 
         if causal:
             padding = [[0, 0], [(kernel_size - 1) * dilation, 0], [0, 0]]
-            padded = tf.pad(input_, padding)
-            input_expanded = tf.expand_dims(padded, dim=1)
+            padded = tf.pad(tensor=input_, paddings=padding)
+            input_expanded = tf.expand_dims(padded, axis=1)
             out = tf.nn.atrous_conv2d(input_expanded, weight, rate=dilation, padding='VALID') + bias
         else:
-            input_expanded = tf.expand_dims(input_, dim=1)
+            input_expanded = tf.expand_dims(input_, axis=1)
             # out = tf.nn.atrous_conv2d(input_expanded, w, rate = dilation, padding = 'SAME') + bias
-            out = tf.nn.conv2d(input_expanded, weight, strides=[1, 1, 1, 1], padding="SAME") + bias
+            out = tf.nn.conv2d(input=input_expanded, filters=weight, strides=[1, 1, 1, 1], padding="SAME") + bias
 
         return tf.squeeze(out, [1])
 

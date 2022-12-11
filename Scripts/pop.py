@@ -16,11 +16,11 @@ if __name__ == '__main__':
     args = parse_args()
 
     data_directory = args.data
-    replay_buffer_behavior = pd.read_pickle(os.path.join(data_directory, 'sorted_renttherunway.df'))
+    replay_buffer_behavior = pd.read_pickle(os.path.join(data_directory, 'sorted_amazon.df'))
     total_actions=replay_buffer_behavior.shape[0]
     pop_dict={}
     for index, row in replay_buffer_behavior.iterrows():
-        action=row['item_id']
+        action=row['asin']
         if action in pop_dict:
             pop_dict[action]+=1
         else:

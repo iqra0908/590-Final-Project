@@ -6,22 +6,22 @@ from utility import to_pickled_df, pad_history
 flags = tf.compat.v1.app.flags
 FLAGS = flags.FLAGS
 
-flags.DEFINE_integer('history_length',10,'uniform history length')
+#flags.DEFINE_integer('history_length',10,'uniform history length')
 
 if __name__ == '__main__':
 
-    data_directory = 'Datasets/Renttherunway'
+    data_directory = 'Datasets/Amazon'
 
     length=FLAGS.history_length
 
-    renttherunway = pd.read_pickle(os.path.join(data_directory, 'sorted_renttherunway.df'))
-    item_ids=renttherunway.item_id.unique()
-    pad_item=len(item_ids)
+    renttherunway = pd.read_pickle(os.path.join(data_directory, 'sorted_amazon.df'))
+    asins=renttherunway.asin.unique()
+    pad_item=len(asins)
     print(renttherunway.head())
 
     train_sessions = pd.read_pickle(os.path.join(data_directory, 'sampled_train.df'))
-    groups=train_sessions.groupby('user_id')
-    ids=train_sessions.user_id.unique()
+    groups=train_sessions.groupby('reviewerID')
+    ids=train_sessions.reviewerID.unique()
 
     state, len_state, action, rating, next_state, len_next_state, is_done = [], [], [], [], [],[],[]
 
@@ -32,12 +32,12 @@ if __name__ == '__main__':
             s=list(history)
             len_state.append(length if len(s)>=length else 1 if len(s)==0 else len(s))
             s=pad_history(s,length,pad_item)
-            a=row['item_id']
-            rat=row['rating']
+            a=row['asin']
+            rat=row['overall']
             state.append(s)
             action.append(a)
             rating.append(rat)
-            history.append(row['item_id'])
+            history.append(row['asin'])
             next_s=list(history)
             len_next_state.append(length if len(next_s)>=length else 1 if len(next_s)==0 else len(next_s))
             next_s=pad_history(next_s,length,pad_item)

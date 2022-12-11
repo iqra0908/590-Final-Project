@@ -302,8 +302,8 @@ class QNetwork:
 
 def evaluate(sess):
     eval_sessions=pd.read_pickle(os.path.join(data_directory, 'sampled_val.df'))
-    eval_ids = eval_sessions.session_id.unique()
-    groups = eval_sessions.groupby('session_id')
+    eval_ids = eval_sessions.user_id.unique()
+    groups = eval_sessions.groupby('user_id')
     batch = 100
     evaluated=0
     total_clicks=0.0
@@ -381,7 +381,7 @@ if __name__ == '__main__':
     reward_negative=args.r_negative
     topk=[5,10,15,20]
     # save_file = 'pretrain-GRU/%d' % (hidden_size)
-
+    
     tf.compat.v1.reset_default_graph()
 
     QN_1 = QNetwork(name='QN_1', hidden_size=args.hidden_factor, learning_rate=args.lr, item_num=item_num,
@@ -390,7 +390,7 @@ if __name__ == '__main__':
                     state_size=state_size, pretrain=False)
 
     replay_buffer = pd.read_pickle(os.path.join(data_directory, 'replay_buffer.df'))
-
+    
     f = open(os.path.join(data_directory, 'pop_dict.txt'), 'r')
     pop_dict = eval(f.read())
     f.close()
@@ -443,7 +443,8 @@ if __name__ == '__main__':
                 target_Q__current_selector = sess.run(mainQN.output1,
                                                       feed_dict={mainQN.inputs: state,
                                                                  mainQN.len_state: len_state,
-                                                                 mainQN.is_training:True})
+                                                                mainQN.is_training:True})
+                 
                 action = list(batch['action'].values())
                 negative=[]
 
@@ -481,7 +482,7 @@ if __name__ == '__main__':
                     total_step += 1
                     if total_step % 200 == 0:
                         print("the loss in %dth batch is: %f" % (total_step, loss))
-                    if total_step % 4000 == 0:
+                    if total_step % 1000 == 0:
                         evaluate(sess)
                 else:
 
@@ -506,7 +507,7 @@ if __name__ == '__main__':
                     total_step += 1
                     if total_step % 200 == 0:
                         print("the loss in %dth batch is: %f" % (total_step, loss))
-                    if total_step % 4000 == 0:
+                    if total_step % 1000 == 0:
                         evaluate(sess)
 
 

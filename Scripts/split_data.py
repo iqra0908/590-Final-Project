@@ -5,11 +5,11 @@ from utility import to_pickled_df
 
 
 if __name__ == '__main__':
-    data_directory = 'Datasets/Renttherunway'
+    data_directory = 'Datasets/Amazon'
     
-    renttherunway = pd.read_pickle(os.path.join(data_directory, 'sorted_renttherunway.df'))
+    renttherunway = pd.read_pickle(os.path.join(data_directory, 'sorted_amazon.df'))
 
-    total_sessions=renttherunway.user_id.unique()
+    total_sessions=renttherunway.reviewerID.unique()
     np.random.shuffle(total_sessions)
 
     fractions = np.array([0.8, 0.1, 0.1])

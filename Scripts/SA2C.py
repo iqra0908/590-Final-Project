@@ -302,8 +302,8 @@ class QNetwork:
 
 def evaluate(sess):
     eval_sessions=pd.read_pickle(os.path.join(data_directory, 'sampled_val.df'))
-    eval_ids = eval_sessions.user_id.unique()
-    groups = eval_sessions.groupby('user_id')
+    eval_ids = eval_sessions.reviewerID.unique()
+    groups = eval_sessions.groupby('reviewerID')
     batch = 100
     evaluated=0
     total_clicks=0.0
@@ -335,7 +335,7 @@ def evaluate(sess):
                 len_states.append(state_size if len(state)>=state_size else 1 if len(state)==0 else len(state))
                 state=pad_history(state,state_size,item_num)
                 states.append(state)
-                action=row['item_id']
+                action=row['asin']
                 rating=row['rating']
                 reward = reward_buy if rating >= 5 else reward_click
                 if rating >= 5:
@@ -344,7 +344,7 @@ def evaluate(sess):
                     total_clicks+=1.0
                 actions.append(action)
                 rewards.append(reward)
-                history.append(row['item_id'])
+                history.append(row['asin'])
             evaluated+=1
         prediction=sess.run(QN_1.output2, feed_dict={QN_1.inputs: states,QN_1.len_state:len_states,QN_1.is_training:False})
         sorted_list=np.argsort(prediction)

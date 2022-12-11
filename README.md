@@ -2,7 +2,7 @@
 
 
 # Authors
-Iqra Imtiaz: Worked on RenttheRunway
+Iqra Imtiaz: Worked on Amazon
 
 Simon Nyamu: Worked on RetailRocket
 
@@ -12,7 +12,7 @@ Simon Nyamu: Worked on RetailRocket
 
  ## Datasets
  * RetialRocket
- * Renttherunway
+ * Amazon Clothing and Jewelery
 
 ## Models
 * LightFM
@@ -22,16 +22,26 @@ Simon Nyamu: Worked on RetailRocket
 * AUC score
 * NDCG
 
-Further detailed explanation is also added in the following notebooks.
 
-***RentTheRunway_final_project.ipynb***
-
-***RetailRocket_Final_Project.ipynb***
 
 # How to Run
 
-Renttherunway model can be run using following command
+Full detailed explanation is added in the following notebooks.
+
+[*Amazon_final_project.ipynb*](https://github.com/iqra0908/590-Final-Project/blob/main/Amazon_final_project.ipynb)
+
+[*RetailRocket_Final_Project.ipynb*](https://github.com/iqra0908/590-Final-Project/blob/main/RetailRocket_Final_Project.ipynb)
+
+Amazon model can be run using following command
 
 ```
-!python 'Scripts/SA2C.py' --model=SASRec --data='Datasets/Renttherunway' --epoch=100
+!python 'Scripts/SA2C.py' --model=SASRec --data='Datasets/Amazon' --epoch=100
 ```
+
+# Benchmarking
+## Amazon
+
+|Models |HR@5|	NG@5|	HR@10|	NG@10|	NR@20|	NG@20|
+|-----|--------|----|--------|-------|-----|------|
+|GRU-SA2C| 0.021658|0.012944|0.043936|0.020088|0.073329|0.027523
+|SASRec-SA2C  |      |

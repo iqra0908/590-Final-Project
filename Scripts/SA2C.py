@@ -336,9 +336,9 @@ def evaluate(sess):
                 state=pad_history(state,state_size,item_num)
                 states.append(state)
                 action=row['asin']
-                rating=row['rating']
-                reward = reward_buy if rating >= 5 else reward_click
-                if rating >= 5:
+                rating=row['overall']
+                reward = reward_buy if rating >= 4 else reward_click
+                if rating >= 4:
                     total_purchase+=1.0
                 else:
                     total_clicks+=1.0
@@ -460,7 +460,7 @@ if __name__ == '__main__':
                 rating=list(batch['rating'].values())
                 reward=[]
                 for k in range(len(rating)):
-                    reward.append(reward_buy if rating[k] >= 5 else reward_click)
+                    reward.append(reward_buy if rating[k] >= 4 else reward_click)
                 discount = [args.discount] * len(action)
 
 

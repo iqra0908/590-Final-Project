@@ -2,9 +2,9 @@
 
 
 # Authors
-Iqra Imtiaz
+Iqra Imtiaz: Worked on RenttheRunway
 
-Simon Nyamu
+Simon Nyamu: Worked on RetailRocket
 
 # Introduction
  In this repository we have two contextual and sequential based recommender systems for E-commerce use case. 
@@ -25,6 +25,7 @@ Simon Nyamu
 Further detailed explanation is also added in the following notebooks.
 
 ***RentTheRunway_final_project.ipynb***
+
 ***RetailRocket_Final_Project.ipynb***
 
 # How to Run

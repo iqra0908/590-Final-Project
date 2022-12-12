@@ -39,6 +39,8 @@ Amazon model can be run using following command
 ```
 !python 'Scripts/SA2C.py' --model=SASRec --data='Datasets/Amazon' --epoch=100
 ```
+To use Google Colab GPU, the steps for the RetailRocket implementation are provided in the Google Colab Notebook
+Additonal notes on the metrics and dataset are included in the notebook.
 
 # Benchmarking
 ## Amazon
@@ -52,6 +54,7 @@ Amazon model can be run using following command
 
 ## RetailRocket
 
-Model: LightFM\
-AUC Train score: 0.9973406\
-AUC Test score: 0.82500917
+| Model    | Training Set|Testing Set|
+|----------|-------------|-----------|
+|LightFM   | 0.9973406   | 0.82500917|
+Note: Typically, the AUC score is between 0 and 1 and a score of 0.8 or higher is considered good.

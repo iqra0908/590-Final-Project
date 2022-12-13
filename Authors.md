@@ -32,16 +32,21 @@ Created [*README.md*](https://github.com/iqra0908/590-Final-Project/blob/main/RE
   * replay_buffer.df
   * sampled_train.df
   * sampled_val.df
+* Performed all the above steps for RetailRocket dataset as well.
+* Separated files for each dataset, created scripts and organized code structure before uploading into github repo.
 
 **Modeling**
-* Ran following models on training data created before, each with 6000 batches.
+* Ran following models on amazon training data created before, each with 6000 batches.
   * GRU
   * SASRec
   * Caser
   * NItNet
+* Created deep RL model for retail rocket as well and ran on training data.
+* Added non-Deep RL for Amazon training data and calculated AUC score.
   
 **Benchmarking**
 * Chose NDCG metric because it is a measure of ranking quality which works great checking rating on Amazon products.
+* Choosen AUC score for non-Deep RL on amazon data.
 * Collected results from above models and reported in Readme.
 
 ## *Simon Nyamu*

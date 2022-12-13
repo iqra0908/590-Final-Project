@@ -52,6 +52,10 @@ Additonal notes on the metrics and dataset are included in the notebook.
 |Caser-SA2C|0.021040|0.011621|0.042079|0.018490|0.065903|0.024479|
 |NItNet|0.025062|0.014832|0.043007|0.020603|0.073020|0.027998|
 
+| Model    | Training Set|Testing Set|
+|----------|-------------|-----------|
+|LightFM   | 0.9942909   | 0.9696471|
+
 ## RetailRocket
 
 | Model    | Training Set|Testing Set|

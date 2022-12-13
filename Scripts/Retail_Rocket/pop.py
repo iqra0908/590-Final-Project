@@ -16,11 +16,11 @@ if __name__ == '__main__':
     args = parse_args()
 
     data_directory = args.data
-    replay_buffer_behavior = pd.read_pickle(os.path.join(data_directory, 'sorted_amazon.df'))
+    replay_buffer_behavior = pd.read_pickle(os.path.join(data_directory, 'events_processed.df'))
     total_actions=replay_buffer_behavior.shape[0]
     pop_dict={}
     for index, row in replay_buffer_behavior.iterrows():
-        action=row['asin']
+        action=row['itemid']
         if action in pop_dict:
             pop_dict[action]+=1
         else:
@@ -29,6 +29,7 @@ if __name__ == '__main__':
             print (index/100000)
     for key in pop_dict:
         pop_dict[key]=float(pop_dict[key])/float(total_actions)
-    f = open('/pop_dict.txt', 'w')
+    
+    f = open(os.path.join(data_directory, 'pop_dict.txt'), 'w')
     f.write(str(pop_dict))
     f.close()

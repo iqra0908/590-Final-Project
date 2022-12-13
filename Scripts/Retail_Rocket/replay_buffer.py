@@ -10,18 +10,18 @@ FLAGS = flags.FLAGS
 
 if __name__ == '__main__':
 
-    data_directory = 'Datasets/Amazon'
+    data_directory = 'Datasets/RetailRocket'
 
     length=FLAGS.history_length
 
-    renttherunway = pd.read_pickle(os.path.join(data_directory, 'sorted_amazon.df'))
-    asins=renttherunway.asin.unique()
-    pad_item=len(asins)
+    renttherunway = pd.read_pickle(os.path.join(data_directory, 'events_processed.df'))
+    itemids=renttherunway.itemid.unique()
+    pad_item=len(itemids)
     print(renttherunway.head())
 
-    train_sessions = pd.read_pickle(os.path.join(data_directory, 'sampled_train.df'))
-    groups=train_sessions.groupby('reviewerID')
-    ids=train_sessions.reviewerID.unique()
+    train_sessions = pd.read_pickle(os.path.join(data_directory, 'events_train.df'))
+    groups=train_sessions.groupby('visitorid')
+    ids=train_sessions.visitorid.unique()
 
     state, len_state, action, rating, next_state, len_next_state, is_done = [], [], [], [], [],[],[]
 
@@ -32,12 +32,12 @@ if __name__ == '__main__':
             s=list(history)
             len_state.append(length if len(s)>=length else 1 if len(s)==0 else len(s))
             s=pad_history(s,length,pad_item)
-            a=row['asin']
-            rat=row['overall']
+            a=row['itemid']
+            rat=row['rating']
             state.append(s)
             action.append(a)
             rating.append(rat)
-            history.append(row['asin'])
+            history.append(row['itemid'])
             next_s=list(history)
             len_next_state.append(length if len(next_s)>=length else 1 if len(next_s)==0 else len(next_s))
             next_s=pad_history(next_s,length,pad_item)

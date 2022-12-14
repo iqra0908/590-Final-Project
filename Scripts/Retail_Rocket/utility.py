@@ -79,7 +79,10 @@ def calculate_hit(sorted_list,topk,true_items,rewards,r_click,total_reward,hit_c
 def calculate_off(sorted_list,true_items,rewards,reward_click,off_click_ng,off_purchase_ng,off_prob_click,off_prob_purchase,pop_dict,topk=10):
     rec_list = sorted_list[:, -topk:]
     for j in range(len(true_items)):
-        prob = pop_dict[true_items[j]]
+        try:
+            prob = pop_dict[true_items[j]]
+        except:
+            continue
         #off_prob_total[0]+=1.0/prob
         if rewards[j] == reward_click:
             off_prob_click[0]+=1.0/prob

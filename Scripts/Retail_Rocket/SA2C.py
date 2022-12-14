@@ -26,6 +26,8 @@ def parse_args():
                         help='Number of hidden factors, i.e., embedding size.')
     parser.add_argument('--r_click', type=float, default=0.2,
                         help='reward for the click behavior.')
+    parser.add_argument('--r_cart', type=float, default=0.5,
+                        help='reward for the add to cart behavior.')
     parser.add_argument('--r_buy', type=float, default=1.0,
                         help='reward for the purchase behavior.')
     parser.add_argument('--r_negative', type=float, default=-0.0,
@@ -337,11 +339,14 @@ def evaluate(sess):
                 states.append(state)
                 action=row['itemid']
                 rating=row['rating']
-                reward = reward_buy if rating >= 4 else reward_click
-                if rating >= 4:
-                    total_purchase+=1.0
-                else:
+                if rating == 0: #addtocart
+                    reward = reward_cart
+                elif rating == 2: #view
+                    reward = reward_click
                     total_clicks+=1.0
+                else:
+                    reward = reward_buy
+                    total_purchase+=1.0
                 actions.append(action)
                 rewards.append(reward)
                 history.append(row['itemid'])
@@ -376,6 +381,7 @@ if __name__ == '__main__':
         os.path.join(data_directory, 'data_statis.df'))  # read data statistics, includeing state_size and item_num
     state_size = data_statis['state_size'][0]  # the length of history to define the state
     item_num = data_statis['item_num'][0]  # total number of items
+    reward_cart = args.r_cart
     reward_click = args.r_click
     reward_buy = args.r_buy
     reward_negative=args.r_negative
@@ -460,7 +466,12 @@ if __name__ == '__main__':
                 rating=list(batch['rating'].values())
                 reward=[]
                 for k in range(len(rating)):
-                    reward.append(reward_buy if rating[k] >= 4 else reward_click)
+                    if rating[k] == 0: #addtocart
+                        reward.append(reward_cart)
+                    elif rating[k] == 2: #view
+                        reward.append(reward_click)
+                    else:
+                        reward.append(reward_buy)
                 discount = [args.discount] * len(action)
 
 

@@ -6,7 +6,7 @@ from utility import to_pickled_df, pad_history
 flags = tf.compat.v1.app.flags
 FLAGS = flags.FLAGS
 
-#flags.DEFINE_integer('history_length',10,'uniform history length')
+flags.DEFINE_integer('history_length',10,'uniform history length')
 
 if __name__ == '__main__':
 

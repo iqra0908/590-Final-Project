@@ -62,3 +62,7 @@ Additonal notes on the metrics and dataset are included in the notebook.
 |----------|-------------|-----------|
 |LightFM   | 0.9973406   | 0.82500917|
 Note: Typically, the AUC score is between 0 and 1 and a score of 0.8 or higher is considered good.
+
+|Models |HR@5|	NG@5|	HR@10|	NG@10|	NR@20|	NG@20|
+|-----|--------|----|--------|-------|-----|------|
+|GRU-SA2C| 0.141509|0.116969|0.160377|0.122841|0.188679|0.130190|

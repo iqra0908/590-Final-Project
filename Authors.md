@@ -63,7 +63,6 @@ i)File with behaviour data (events.csv)
 (iii)File describing the category tree (categorytree.сsv).
 
 **Running the Model
-
 * Worked on the pre-processing of the RetailRocket data
 * Researched on session/context-based recommenders and consulted with TA on different models.
 * After discussion with TA, I chose the Non-DRL model (LightFM)

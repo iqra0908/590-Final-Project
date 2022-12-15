@@ -51,8 +51,27 @@ Created [*README.md*](https://github.com/iqra0908/590-Final-Project/blob/main/RE
 
 ## *Simon Nyamu*
 
+* Created the non-DRL notebook RetailRocket_final_project.ipynb
+* Included documentation and step-by-step instructions on completing the project
+* Contributed in the README.md. and overall project documentation
+* Provided relevant references for the dataset, model, metrics and project implementations
+
 **Dataset**
+The RetailRocket include the three dataset files:
+i)File with behaviour data (events.csv)
+(ii)File with item properties (itemproperties.сsv)
+(iii)File describing the category tree (categorytree.сsv).
+
+**Running the Model
+* Worked on the pre-processing of the RetailRocket data
+* Researched on session/context-based recommenders and consulted with TA on different models.
+* After discussion with TA, I chose the Non-DRL model (LightFM)
+* Chose the metrics(AUC-ROC) for the non-DRL part of the project
 
 **Modeling**
+* Installed LightFM and used it for modeling of the dataset
+* Determined the choice of metrics, ran the model and collected the metrics.
+* After Iqra created the scripts, I ran through both the RetailRocket and the Amazon recommenders to validate the scores with the scripts.
 
 **Benchmarking**
+* Chose AUC as the metric because it a simple measure that offers an uncomplicated way to summarize a model’s overall performance. It helps to measure the likelihood that a random relevant item will be ranked higher than a random irrelevant item.

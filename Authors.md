@@ -51,7 +51,7 @@ Created [*README.md*](https://github.com/iqra0908/590-Final-Project/blob/main/RE
 
 ## *Simon Nyamu*
 
-* Created the non-DRL notebook RetailRocket_final_project.ipynb
+* Created the non-DRL notebook *RetailRocket_final_project.ipynb* [https://github.com/iqra0908/590-Final-Project/blob/main/RetailRocket_Final_Project.ipynb]
 * Included documentation and step-by-step instructions on completing the project
 * Contributed in the README.md. and overall project documentation
 * Provided relevant references for the dataset, model, metrics and project implementations
@@ -61,6 +61,7 @@ The RetailRocket include the three dataset files:
 i)File with behaviour data (events.csv)
 (ii)File with item properties (itemproperties.сsv)
 (iii)File describing the category tree (categorytree.сsv).
+*Dataset available at https://www.kaggle.com/datasets/retailrocket/ecommerce-dataset
 
 **Running the Model
 * Worked on the pre-processing of the RetailRocket data
@@ -75,5 +76,6 @@ i)File with behaviour data (events.csv)
 
 **Benchmarking**
 * Chose AUC as the metric because it a simple measure that offers an uncomplicated way to summarize a model’s overall performance. It helps to measure the likelihood that a random relevant item will be ranked higher than a random irrelevant item.
+* Updated the scores on the Readme.md.
 
 **Additional information is included in the RetailRocket notebook.

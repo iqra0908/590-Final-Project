@@ -63,6 +63,7 @@ i)File with behaviour data (events.csv)
 (iii)File describing the category tree (categorytree.сsv).
 
 **Running the Model
+
 * Worked on the pre-processing of the RetailRocket data
 * Researched on session/context-based recommenders and consulted with TA on different models.
 * After discussion with TA, I chose the Non-DRL model (LightFM)
@@ -75,3 +76,5 @@ i)File with behaviour data (events.csv)
 
 **Benchmarking**
 * Chose AUC as the metric because it a simple measure that offers an uncomplicated way to summarize a model’s overall performance. It helps to measure the likelihood that a random relevant item will be ranked higher than a random irrelevant item.
+
+**Additional information is included in the RetailRocket notebook.
